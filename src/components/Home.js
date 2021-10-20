@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu } from 'antd';
+import { Col, Layout, Menu, Row } from 'antd';
 import {
   HomeOutlined,
   BorderlessTableOutlined,
@@ -9,11 +9,13 @@ import {
 } from '@ant-design/icons';
 import './Main.css';
 
+import FormContent from './FormContent';
 import TableContent from './TableContent';
+import ChartsContent from './ChartsContent';
 
-const { Header, Footer, Sider } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
 
-const Table = () => {
+const Home = () => {
   return (
     <>
       <Layout className='main'>
@@ -28,7 +30,7 @@ const Table = () => {
           }}
         >
           <div className='logo'>Factors.ai</div>
-          <Menu theme='dark' mode='inline' defaultSelectedKeys={['3']}>
+          <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
             <Menu.Item key='1' icon={<HomeOutlined />}>
               <Link to='/'>Home</Link>
             </Menu.Item>
@@ -48,7 +50,28 @@ const Table = () => {
             className='site-layout-sub-header-background'
             style={{ padding: 0 }}
           />
-          <TableContent />
+          <Content style={{ margin: '24px 16px 0' }}>
+            <div
+              className='site-layout-background'
+              style={{ padding: 24, minHeight: 360 }}
+            >
+              <Row>
+                <Col span={12}>
+                  <FormContent />
+                </Col>
+                <Col span={12}>
+                  <Row style={{ display: 'inline' }}>
+                    <Col span={6}>
+                      <TableContent />
+                    </Col>
+                    <Col span={6}>
+                      <ChartsContent />
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+            </div>
+          </Content>
           <Footer style={{ textAlign: 'center' }}>
             Factors.ai ©2021 Created by Junaid Khan
           </Footer>
@@ -58,4 +81,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default Home;
