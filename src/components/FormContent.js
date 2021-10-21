@@ -1,12 +1,25 @@
-import React from 'react';
-import { Row, Col, Layout, Input, Select } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Input, Select, Button } from 'antd';
+import './Main.css';
+import { post } from '../actions/index';
+import { useDispatch } from 'react-redux';
 
 const { Option } = Select;
 const { Content } = Layout;
 
 const FormContent = () => {
-  function handleChange(value) {
-    console.log(`selected ${value}`);
+  const [subject, setSubject] = useState('');
+  const [exam, setExam] = useState('');
+  const [score, setScore] = useState('');
+
+  const dispatch = useDispatch();
+
+  function handleSubject(value) {
+    setSubject(value);
+  }
+
+  function handleExam(value) {
+    setExam(value);
   }
   return (
     <>
@@ -15,29 +28,45 @@ const FormContent = () => {
           className='site-layout-background'
           style={{ padding: 24, minHeight: 360 }}
         >
-          <Row>
-            <Col span={12}>
-              <div>
-                <Select
-                  style={{ width: 400, display: 'block' }}
-                  onChange={handleChange}
-                >
-                  <Option value='jack'>Jack</Option>
-                  <Option value='lucy'>Lucy</Option>
-                  <Option value='Yiminghe'>yiminghe</Option>
-                </Select>
-                <Select
-                  style={{ width: 400, display: 'block' }}
-                  onChange={handleChange}
-                >
-                  <Option value='jack'>Jack</Option>
-                  <Option value='lucy'>Lucy</Option>
-                  <Option value='Yiminghe'>yiminghe</Option>
-                </Select>
-                <Input placeholder='Score' />
-              </div>
-            </Col>
-          </Row>
+          <div className='form-content'>
+            <Select
+              placeholder='Subject'
+              className='form-item'
+              onChange={handleSubject}
+            >
+              <Option value='Physics'>Physics</Option>
+              <Option value='Chemistry'>Chemistry</Option>
+              <Option value='Math'>Math</Option>
+            </Select>
+            <Select
+              placeholder='Exam'
+              className='form-item'
+              onChange={handleExam}
+            >
+              <Option value='Summer'>Summer</Option>
+              <Option value='Winter'>Winter</Option>
+              <Option value='Final'>Final</Option>
+            </Select>
+            <Input
+              className='form-item'
+              type='number'
+              placeholder='Score'
+              value={score}
+              onChange={(e) => setScore(e.target.value)}
+            />
+            <Button
+              className='form-item'
+              type='primary'
+              onClick={() => {
+                dispatch(post(subject, exam, score));
+                setSubject('');
+                setExam('');
+                setScore('');
+              }}
+            >
+              Submit
+            </Button>
+          </div>
         </div>
       </Content>
     </>

@@ -21,3 +21,28 @@
 [data-theme='dark'] .site-layout-sub-header-background {
   background: #141414;
 }
+
+.form-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  margin: 100px;
+}
+
+.form-item {
+  margin-bottom: 20px;
+  height: 40px;
+}
+
+.table-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.table-item {
+  padding: 30px;
+  text-align: center;
+  border-top: 1px solid rgb(104, 102, 102);
+}
