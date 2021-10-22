@@ -57,17 +57,17 @@ const Home = () => {
             >
               <Row>
                 <Col span={12}>
-                  <FormContent />
-                </Col>
-                <Col span={12}>
                   <Row style={{ display: 'inline' }}>
-                    <Col span={6}>
+                    <Col className='home-content' span={4}>
+                      <FormContent />
+                    </Col>
+                    <Col className='home-content' span={8}>
                       <TableContent />
                     </Col>
-                    <Col span={6}>
-                      <ChartsContent />
-                    </Col>
                   </Row>
+                </Col>
+                <Col span={12}>
+                  <ChartsContent />
                 </Col>
               </Row>
             </div>

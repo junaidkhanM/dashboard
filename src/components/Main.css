@@ -1,7 +1,7 @@
 @import '~antd/dist/antd.css';
 
 .main {
-  height: 100vh;
+  height: 110vh;
 }
 
 .logo {
@@ -22,12 +22,16 @@
   background: #141414;
 }
 
+.home-content {
+  display: inline;
+  width: 70vh !important;
+}
+
 .form-content {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 80%;
-  margin: 100px;
+  margin: 10px;
 }
 
 .form-item {
@@ -39,10 +43,12 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  height: 300px;
+  overflow: scroll;
 }
 
 .table-item {
-  padding: 30px;
+  padding: 20px;
   text-align: center;
   border-top: 1px solid rgb(104, 102, 102);
 }

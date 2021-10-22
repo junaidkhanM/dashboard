@@ -17,6 +17,7 @@ base('Dashboard')
   });
 
 const postData = (state = initialState, action) => {
+  const currState = [];
   if (action.type === 'POST') {
     base('Dashboard').create([
       {
@@ -27,7 +28,17 @@ const postData = (state = initialState, action) => {
         },
       },
     ]);
-    return initialState;
+
+    base('Dashboard')
+      .select({
+        view: 'Grid view',
+      })
+      .eachPage(function page(records, fetchNextPage) {
+        records.map((record) => currState.push(record));
+
+        fetchNextPage();
+      });
+    return currState;
   } else {
     return state;
   }

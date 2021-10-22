@@ -34,6 +34,7 @@ const ChartsContent = () => {
         winter.push([Number(elem.get('Score'))]);
       }
     }
+    return null;
   });
 
   const options = {
@@ -43,7 +44,6 @@ const ChartsContent = () => {
     title: {
       text: subject,
     },
-
     xAxis: {
       type: 'category',
     },
@@ -53,6 +53,7 @@ const ChartsContent = () => {
         text: 'Scores',
       },
     },
+
     series: [
       {
         name: 'Final',
