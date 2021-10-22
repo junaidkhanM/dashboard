@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Layout } from 'antd';
+import { Layout, Table, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteItem } from '../actions/index';
 import { DeleteTwoTone } from '@ant-design/icons';
 
 const { Content } = Layout;
+const { Column } = Table;
 
 const TableContent = () => {
   const [data, setData] = useState([]);
@@ -16,6 +17,18 @@ const TableContent = () => {
     setData(newdata);
   }, [newdata]);
 
+  const dataSource = [];
+
+  data.map((elem) => {
+    dataSource.push({
+      key: elem.id,
+      Subject: elem.fields.Subject,
+      Score: elem.fields.Score,
+      Exam: elem.fields.Exam,
+    });
+    return null;
+  });
+
   return (
     <>
       <Content style={{ margin: '24px 16px 0' }}>
@@ -24,32 +37,24 @@ const TableContent = () => {
           style={{ padding: 24, minHeight: 360 }}
         >
           <div className='table-content'>
-            <table>
-              <thead>
-                <tr>
-                  <th className='table-item'>Subject</th>
-                  <th className='table-item'>Exam</th>
-                  <th className='table-item'>Score</th>
-                </tr>
-              </thead>
-              {data.map((element) => {
-                return (
-                  <tbody key={element.id}>
-                    <tr>
-                      <td className='table-item'>{element.get('Subject')}</td>
-                      <td className='table-item'>{element.get('Exam')}</td>
-                      <td className='table-item'>
-                        {element.get('Score')}
-                        <DeleteTwoTone
-                          onClick={() => dispatch(deleteItem(element.id))}
-                          style={{ marginLeft: '20px', fontSize: '20px' }}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              })}
-            </table>
+            <Table dataSource={dataSource}>
+              <Column title='Subject' dataIndex='Subject' key='Subject' />
+              <Column title='Exam' dataIndex='Exam' key='Exam' />
+              <Column title='Score' dataIndex='Score' key='Score' />
+
+              <Column
+                title='Action'
+                key='action'
+                render={(text, record) => (
+                  <Space size='middle'>
+                    <DeleteTwoTone
+                      onClick={() => dispatch(deleteItem(record.key))}
+                      style={{ marginLeft: '20px', fontSize: '20px' }}
+                    />
+                  </Space>
+                )}
+              />
+            </Table>
           </div>
         </div>
       </Content>

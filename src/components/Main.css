@@ -40,10 +40,7 @@
 }
 
 .table-content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 300px;
+  height: 250px;
   overflow: scroll;
 }
 

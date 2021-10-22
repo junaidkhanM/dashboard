@@ -1,4 +1,5 @@
 import Airtable from 'airtable';
+import { message } from 'antd';
 
 let initialState = [];
 
@@ -45,7 +46,8 @@ const postData = (state = initialState, action) => {
         console.error(err);
         return;
       }
-      alert('Deleted record', deletedRecord.id);
+      message.success('Record deleted', deletedRecord.id);
+      window.location.reload();
     });
 
     base('Dashboard')
