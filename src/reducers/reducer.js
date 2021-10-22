@@ -35,9 +35,29 @@ const postData = (state = initialState, action) => {
       })
       .eachPage(function page(records, fetchNextPage) {
         records.map((record) => currState.push(record));
+        fetchNextPage();
+      });
+
+    return currState;
+  } else if (action.type === 'DELETE') {
+    base('Dashboard').destroy(action.payload, function (err, deletedRecord) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      alert('Deleted record', deletedRecord.id);
+    });
+
+    base('Dashboard')
+      .select({
+        view: 'Grid view',
+      })
+      .eachPage(function page(records, fetchNextPage) {
+        records.map((record) => currState.push(record));
 
         fetchNextPage();
       });
+
     return currState;
   } else {
     return state;

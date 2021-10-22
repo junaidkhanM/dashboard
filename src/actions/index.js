@@ -9,3 +9,10 @@ export const post = (subject, exam, score) => {
     payload: data,
   };
 };
+
+export const deleteItem = (id) => {
+  return {
+    type: 'DELETE',
+    payload: id,
+  };
+};

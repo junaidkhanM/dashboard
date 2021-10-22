@@ -15,11 +15,19 @@ const FormContent = () => {
   const dispatch = useDispatch();
 
   function handleSubject(value) {
-    setSubject(value);
+    if (value === '') {
+      alert('select value of subject');
+    } else {
+      setSubject(value);
+    }
   }
 
   function handleExam(value) {
-    setExam(value);
+    if (value === '') {
+      alert('select value of exam');
+    } else {
+      setExam(value);
+    }
   }
   return (
     <>
@@ -52,15 +60,19 @@ const FormContent = () => {
               type='number'
               placeholder='Score'
               value={score}
-              onChange={(e) => setScore(e.target.value)}
+              onChange={(e) => {
+                if (e.target.value > 101) {
+                  alert('max value should be 100');
+                } else {
+                  setScore(e.target.value);
+                }
+              }}
             />
             <Button
               className='form-item'
               type='primary'
               onClick={() => {
                 dispatch(post(subject, exam, score));
-                setSubject('');
-                setExam('');
                 setScore('');
               }}
             >

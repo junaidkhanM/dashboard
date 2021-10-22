@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteItem } from '../actions/index';
+import { DeleteTwoTone } from '@ant-design/icons';
 
 const { Content } = Layout;
 
 const TableContent = () => {
   const [data, setData] = useState([]);
   const newdata = useSelector((state) => state.postData);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setData(newdata);
@@ -34,7 +38,13 @@ const TableContent = () => {
                     <tr>
                       <td className='table-item'>{element.get('Subject')}</td>
                       <td className='table-item'>{element.get('Exam')}</td>
-                      <td className='table-item'>{element.get('Score')}</td>
+                      <td className='table-item'>
+                        {element.get('Score')}
+                        <DeleteTwoTone
+                          onClick={() => dispatch(deleteItem(element.id))}
+                          style={{ marginLeft: '20px', fontSize: '20px' }}
+                        />
+                      </td>
                     </tr>
                   </tbody>
                 );
