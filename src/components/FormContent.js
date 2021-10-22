@@ -72,8 +72,14 @@ const FormContent = () => {
               className='form-item'
               type='primary'
               onClick={() => {
-                dispatch(post(subject, exam, score));
-                setScore('');
+                if (subject === '' || exam === '') {
+                  alert('Please select subject and exam');
+                } else if (score === '') {
+                  alert('Enter score');
+                } else {
+                  dispatch(post(subject, exam, score));
+                  setScore('');
+                }
               }}
             >
               Submit
