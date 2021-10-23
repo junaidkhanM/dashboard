@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Layout, Table, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteItem } from '../actions/index';
@@ -8,18 +8,13 @@ const { Content } = Layout;
 const { Column } = Table;
 
 const TableContent = () => {
-  const [data, setData] = useState([]);
   const newdata = useSelector((state) => state.postData);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setData(newdata);
-  }, [newdata]);
-
   const dataSource = [];
 
-  data.map((elem) => {
+  newdata.map((elem) => {
     dataSource.push({
       key: elem.id,
       Subject: elem.fields.Subject,

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Layout, Select } from 'antd';
 
 import Highcharts from 'highcharts';
@@ -9,13 +9,8 @@ const { Content } = Layout;
 const { Option } = Select;
 
 const ChartsContent = () => {
-  const [data, setData] = useState([]);
   const [subject, setSubject] = useState('');
   const newdata = useSelector((state) => state.postData);
-
-  useEffect(() => {
-    setData(newdata);
-  }, [newdata]);
 
   const handleSubject = (value) => {
     setSubject(value);
@@ -24,7 +19,7 @@ const ChartsContent = () => {
   const final = [];
   const winter = [];
   const summer = [];
-  data.map((elem) => {
+  newdata.map((elem) => {
     if (subject === elem.get('Subject')) {
       if (elem.get('Exam') === 'Final') {
         final.push([Number(elem.get('Score'))]);

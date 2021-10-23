@@ -28,14 +28,14 @@
 }
 
 .form-content {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  margin: 10px;
+  /* position: relative;
+  left: -100px; */
+  /* margin-left: -200px; */
 }
 
 .form-item {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  /* width: 70vh; */
   height: 40px;
 }
 

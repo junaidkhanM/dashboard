@@ -38,8 +38,8 @@ const postData = (state = initialState, action) => {
         records.map((record) => currState.push(record));
         fetchNextPage();
       });
-
-    return currState;
+    state = currState;
+    return state;
   } else if (action.type === 'DELETE') {
     base('Dashboard').destroy(action.payload, function (err, deletedRecord) {
       if (err) {
@@ -47,7 +47,7 @@ const postData = (state = initialState, action) => {
         return;
       }
       message.success('Record deleted', deletedRecord.id);
-      window.location.reload();
+      // window.location.reload();
     });
 
     base('Dashboard')
@@ -59,8 +59,8 @@ const postData = (state = initialState, action) => {
 
         fetchNextPage();
       });
-
-    return currState;
+    state = currState;
+    return state;
   } else {
     return state;
   }
