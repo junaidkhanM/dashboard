@@ -53,7 +53,7 @@ const FormContent = () => {
           <div className='form-content'>
             <Form
               name='basic'
-              labelCol={{ span: 8 }}
+              labelCol={{ span: 4 }}
               wrapperCol={{ span: 16 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}
