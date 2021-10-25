@@ -19,50 +19,52 @@ base('Dashboard')
 
 const postData = (state = initialState, action) => {
   const currState = [];
-  if (action.type === 'POST') {
-    base('Dashboard').create([
-      {
-        fields: {
-          Score: action.payload.score,
-          Subject: action.payload.subject,
-          Exam: action.payload.exam,
+
+  switch (action.type) {
+    case 'POST':
+      base('Dashboard').create([
+        {
+          fields: {
+            Score: action.payload.score,
+            Subject: action.payload.subject,
+            Exam: action.payload.exam,
+          },
         },
-      },
-    ]);
+      ]);
 
-    base('Dashboard')
-      .select({
-        view: 'Grid view',
-      })
-      .eachPage(function page(records, fetchNextPage) {
-        records.map((record) => currState.push(record));
-        fetchNextPage();
+      base('Dashboard')
+        .select({
+          view: 'Grid view',
+        })
+        .eachPage(function page(records, fetchNextPage) {
+          records.map((record) => currState.push(record));
+          fetchNextPage();
+        });
+      state = currState;
+      return state;
+    case 'DELETE':
+      base('Dashboard').destroy(action.payload, function (err, deletedRecord) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        message.success('Record deleted', deletedRecord.id);
+        // window.location.reload();
       });
-    state = currState;
-    return state;
-  } else if (action.type === 'DELETE') {
-    base('Dashboard').destroy(action.payload, function (err, deletedRecord) {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      message.success('Record deleted', deletedRecord.id);
-      // window.location.reload();
-    });
 
-    base('Dashboard')
-      .select({
-        view: 'Grid view',
-      })
-      .eachPage(function page(records, fetchNextPage) {
-        records.map((record) => currState.push(record));
+      base('Dashboard')
+        .select({
+          view: 'Grid view',
+        })
+        .eachPage(function page(records, fetchNextPage) {
+          records.map((record) => currState.push(record));
 
-        fetchNextPage();
-      });
-    state = currState;
-    return state;
-  } else {
-    return state;
+          fetchNextPage();
+        });
+      state = currState;
+      return state;
+    default:
+      return state;
   }
 };
 
