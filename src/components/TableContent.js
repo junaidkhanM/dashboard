@@ -1,14 +1,14 @@
 import React from 'react';
 import { Layout, Table, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteItem } from '../actions/index';
+import { deleteItem } from '../redux/actions';
 import { DeleteTwoTone } from '@ant-design/icons';
 
 const { Content } = Layout;
 const { Column } = Table;
 
 const TableContent = () => {
-  const newdata = useSelector((state) => state.postData);
+  const newdata = useSelector((state) => state);
 
   const dispatch = useDispatch();
 

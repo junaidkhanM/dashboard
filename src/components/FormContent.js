@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Input, Select, Button, Form, message } from 'antd';
 import './Main.css';
-import { post } from '../actions/index';
+import { post } from '../redux/actions';
 import { useDispatch } from 'react-redux';
 
 const { Option } = Select;

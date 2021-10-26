@@ -10,7 +10,7 @@ const { Option } = Select;
 
 const ChartsContent = () => {
   const [subject, setSubject] = useState('');
-  const newdata = useSelector((state) => state.postData);
+  const newdata = useSelector((state) => state);
 
   const handleSubject = (value) => {
     setSubject(value);
